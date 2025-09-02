@@ -14,18 +14,18 @@ public class Pion {
      *
      * @param couleur la couleur du pion(noir ou blanc)
      */
-    public Pion(String couleur) {
+    protected Pion(String couleur) {
         this.couleur = couleur;
     }
 
     /**
      * Constructeur sans argument de la classe pion (met la couleur en blanc).
      */
-    public Pion() {
+    protected Pion() {
         this.couleur = "blanc";
     }
 
-    public String getCouleur() {
+    protected String getCouleur() {
         return couleur;
     }
 }
