@@ -30,7 +30,7 @@ public class Damier {
      * @param pion Le pion à ajouter dans la list.
      */
     protected void ajoutPion(int position, Pion pion) {
-        pions.add(position - 1, pion);
+        pions.set(position - 1, pion);
     }
 
     /**
