@@ -23,6 +23,17 @@ public class Damier {
         }
     }
 
+    protected void Initialiser() {
+        for (int i = 1; i <= 50; i++) {
+            if (i < 21) {
+                ajoutPion(i, new Pion(Pion.CouleurPion.Noir));
+            }
+            if (i < 30) {
+                ajoutPion(i, new Pion());
+            }
+        }
+    }
+
     /**
      * Ajoute un pion dans la list pions.
      *

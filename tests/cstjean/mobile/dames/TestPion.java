@@ -8,21 +8,32 @@ import junit.framework.TestCase;
  * @author Isaak Fortin
  */
 public class TestPion extends TestCase {
+    protected static final String REPRESENTATION_PION_BLANC = "p";
+    protected static final String REPRESENTATION_PION_NOIR = "P";
     /**
      * Teste la création d'un pion.
      */
     public void testCreer() {
         // Teste du constructeur avec argument.
-        String couleurPion1 = "noir";
-        Pion pion1 = new Pion(couleurPion1);
-        assertEquals(couleurPion1, pion1.getCouleur());
+        Pion pion1 = creerPion(Pion.CouleurPion.Noir);
+        assertEquals("noir", pion1.getCouleur());
+        assertEquals(REPRESENTATION_PION_NOIR, pion1.getRepresentation());
 
-        String couleurPion2 = "blanc";
-        Pion pion2 = new Pion(couleurPion2);
-        assertEquals(couleurPion2, pion2.getCouleur());
+        Pion pion2 = creerPion(Pion.CouleurPion.Blanc);
+        assertEquals("blanc", pion2.getCouleur());
+        assertEquals(REPRESENTATION_PION_BLANC, pion2.getRepresentation());
 
         // Teste du constructeur sans argument.
-        Pion pion3 = new Pion();
+        Pion pion3 = creerPion();
         assertEquals("blanc", pion3.getCouleur());
+        assertEquals(REPRESENTATION_PION_BLANC, pion3.getRepresentation());
+    }
+
+    protected Pion creerPion(Pion.CouleurPion couleur) {
+        return new Pion(couleur);
+    }
+
+    protected Pion creerPion() {
+        return new Pion();
     }
 }
