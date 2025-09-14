@@ -25,10 +25,20 @@ public class Pion {
         this.couleur = CouleurPion.Blanc;
     }
 
+    /**
+     * Accèdeur de la couleur du pion.
+     *
+     * @return La couleur du pion en String.
+     */
     protected String getCouleur() {
         return couleur.toString();
     }
 
+    /**
+     * Accèdeur de la représentation d'un pion dans la console.
+     *
+     * @return La représentation d'un pion p = blanc P = noir.
+     */
     protected String getRepresentation() {
         if (couleur == CouleurPion.Blanc) {
             return "p";
@@ -37,14 +47,23 @@ public class Pion {
         }
     }
 
-
+    /**
+     * Énumération de la couleur de Pion.
+     */
     protected enum CouleurPion {
+        /**
+         * La couleur Blanc pour un pion.
+         */
         Blanc {
             @Override
             public String toString() {
                 return "blanc";
             }
-        }, Noir {
+        },
+        /**
+         * La couleur Noir pour un pion.
+         */
+        Noir {
             @Override
             public String toString() {
                 return "noir";

@@ -16,24 +16,27 @@ public class TestDamier extends TestCase {
         Damier damier = new Damier();
         Pion pion1 = new Pion();
         damier.ajoutPion(38, pion1);
-        assertEquals(damier.getNombresPion(), 1);
+        assertEquals(1, damier.getNombresPion());
         assertEquals(damier.getPion(38), pion1);
 
         Pion pion2 = new Pion(Pion.CouleurPion.Noir);
         damier.ajoutPion(1, pion2);
-        assertEquals(damier.getNombresPion(), 2);
+        assertEquals(2, damier.getNombresPion());
         assertEquals(damier.getPion(1), pion2);
     }
 
+    /**
+     * Test l'initialisation d'un damier.
+     */
     public void testInitialisation() {
         Damier damier = new Damier();
-        damier.Initialiser();
+        damier.initialiser();
         assertEquals(40, damier.getNombresPion());
         for (int i = 1; i <= 50; i++) {
             if (i < 21) {
                 assertEquals("noir", damier.getPion(i).getCouleur());
             }
-            if (i < 30) {
+            if (i > 30) {
                 assertEquals("blanc", damier.getPion(i).getCouleur());
             }
         }
