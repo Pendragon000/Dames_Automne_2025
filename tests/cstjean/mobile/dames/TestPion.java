@@ -1,5 +1,6 @@
 package cstjean.mobile.dames;
 
+import java.util.Objects;
 import junit.framework.TestCase;
 
 /**
@@ -24,16 +25,16 @@ public class TestPion extends TestCase {
         // Teste du constructeur avec argument.
         Pion pion1 = creerPion(Pion.CouleurPion.Noir);
         assertEquals("noir", pion1.getCouleur());
-        assertEquals(REPRESENTATION_PION_NOIR, pion1.getRepresentation());
+        assertEquals(getExpectedRepresentation(pion1), pion1.getRepresentation());
 
         Pion pion2 = creerPion(Pion.CouleurPion.Blanc);
         assertEquals("blanc", pion2.getCouleur());
-        assertEquals(REPRESENTATION_PION_BLANC, pion2.getRepresentation());
+        assertEquals(getExpectedRepresentation(pion2), pion2.getRepresentation());
 
         // Teste du constructeur sans argument.
         Pion pion3 = creerPion();
         assertEquals("blanc", pion3.getCouleur());
-        assertEquals(REPRESENTATION_PION_BLANC, pion3.getRepresentation());
+        assertEquals(getExpectedRepresentation(pion3), pion3.getRepresentation());
     }
 
     /**
@@ -53,5 +54,19 @@ public class TestPion extends TestCase {
      */
     protected Pion creerPion() {
         return new Pion();
+    }
+
+    /**
+     * Donne la représentation attendue du pion dans la console.
+     *
+     * @param pion Le pion qu'on a besoin de la représentation
+     * @return La représentation attendue du pion en String.
+     */
+    protected String getExpectedRepresentation(Pion pion) {
+        if (Objects.equals(pion.getCouleur(), "blanc")) {
+            return REPRESENTATION_PION_BLANC;
+        } else {
+            return REPRESENTATION_PION_NOIR;
+        }
     }
 }

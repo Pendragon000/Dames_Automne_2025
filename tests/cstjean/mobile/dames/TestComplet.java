@@ -17,6 +17,7 @@ public class TestComplet {
         TestSuite suite = new TestSuite();
         suite.addTestSuite(TestDamier.class);
         suite.addTestSuite(TestPion.class);
+        suite.addTestSuite(TestDamier.class);
         return suite;
     }
 }
