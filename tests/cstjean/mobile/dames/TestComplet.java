@@ -18,6 +18,8 @@ public class TestComplet {
         suite.addTestSuite(TestDamier.class);
         suite.addTestSuite(TestPion.class);
         suite.addTestSuite(TestDamier.class);
+        suite.addTestSuite(TestPartie.class);
+        suite.addTestSuite(TestJoueur.class);
         return suite;
     }
 }
