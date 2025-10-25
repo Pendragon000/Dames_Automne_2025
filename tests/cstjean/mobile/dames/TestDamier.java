@@ -1,6 +1,7 @@
 package cstjean.mobile.dames;
 
 import junit.framework.TestCase;
+import org.junit.Assert;
 
 /**
  * Class Test pour la Class Damier.
@@ -40,5 +41,26 @@ public class TestDamier extends TestCase {
                 assertEquals("blanc", damier.getPion(i).getCouleur());
             }
         }
+    }
+
+    /**
+     * Test la création de l'array 2d du damier.
+     */
+    public void test2dArray() {
+        Damier damier = new Damier();
+        damier.initialiser();
+        Pion[][] damier2D = new Pion[10][10];
+        for (int row = 0; row < 10; row++) {
+            for (int col = 0; col < 10; col++) {
+                if ((row + col) % 2 == 0) {
+                    if (row < 4) {
+                        damier2D[row][col] = new Pion(Pion.CouleurPion.Noir);
+                    } else if (row > 5) {
+                        damier2D[row][col] = new Pion(Pion.CouleurPion.Blanc);
+                    }
+                }
+            }
+        }
+        Assert.assertArrayEquals(damier2D, damier.get2dArray());
     }
 }

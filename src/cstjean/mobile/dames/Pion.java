@@ -1,5 +1,7 @@
 package cstjean.mobile.dames;
 
+import java.util.Objects;
+
 /**
  * Classe d'un pion dans un jeu de dame.
  */
@@ -47,6 +49,19 @@ public class Pion {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() == this.getClass()) {
+            return ((Pion) o).getCouleur().equals(this.getCouleur());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(couleur);
+    }
+
     /**
      * Énumération de la couleur de Pion.
      */
@@ -69,6 +84,8 @@ public class Pion {
                 return "noir";
             }
         }
+
+
     }
 }
 

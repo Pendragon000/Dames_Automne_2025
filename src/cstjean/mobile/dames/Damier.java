@@ -72,4 +72,25 @@ public class Damier {
     protected Pion getPion(int position) {
         return pions.get(position - 1);
     }
+
+    /**
+     * Covertie la list de 50 de notation manoury pour un array 2D de pion.
+     *
+     * @return Un array 2D de pion du damier.
+     */
+    protected Pion[][] get2dArray() {
+        Pion[][] grille = new Pion[10][10];
+        int index = 0;
+        for (int row = 0; row < 10; row++) {
+            for (int col = 0; col < 10; col++) {
+                if ((row + col) % 2 == 0) {
+                    grille[row][col] = pions.get(index);
+                    index++;
+                } else {
+                    grille[row][col] = null;
+                }
+            }
+        }
+        return grille;
+    }
 }
