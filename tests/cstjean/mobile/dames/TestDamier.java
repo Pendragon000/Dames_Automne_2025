@@ -40,15 +40,5 @@ public class TestDamier extends TestCase {
                 assertEquals("blanc", damier.getPion(i).getCouleur());
             }
         }
-        assertEquals("-P-P-P-P-P" + Damier.SAUT_LIGNE +
-                "P-P-P-P-P-" + Damier.SAUT_LIGNE +
-                "-P-P-P-P-P" + Damier.SAUT_LIGNE +
-                "P-P-P-P-P-" + Damier.SAUT_LIGNE +
-                "----------" + Damier.SAUT_LIGNE +
-                "----------" + Damier.SAUT_LIGNE +
-                "-p-p-p-p-p" + Damier.SAUT_LIGNE +
-                "p-p-p-p-p-" + Damier.SAUT_LIGNE +
-                "-p-p-p-p-p" + Damier.SAUT_LIGNE +
-                "p-p-p-p-p-" + Damier.SAUT_LIGNE, damier.getRepresentation());
     }
 }

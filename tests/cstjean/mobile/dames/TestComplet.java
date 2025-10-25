@@ -20,6 +20,7 @@ public class TestComplet {
         suite.addTestSuite(TestDamier.class);
         suite.addTestSuite(TestPartie.class);
         suite.addTestSuite(TestJoueur.class);
+        suite.addTestSuite(TestRepresentationDamier.class);
         return suite;
     }
 }

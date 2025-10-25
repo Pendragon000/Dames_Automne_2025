@@ -15,11 +15,6 @@ public class Damier {
     private final List<Pion> pions = new ArrayList<>(50);
 
     /**
-     * Le saut de ligne par défaut du system.
-     */
-    protected static final String SAUT_LIGNE = System.lineSeparator();
-
-    /**
      * Constructeur par défaut de la classe Damier.
      */
     protected Damier() {
@@ -76,33 +71,5 @@ public class Damier {
      */
     protected Pion getPion(int position) {
         return pions.get(position - 1);
-    }
-
-    /**
-     * Représentation du damier en String.
-     *
-     * @return La String représentant le damier.
-     */
-    protected String getRepresentation() {
-        StringBuilder builder = new StringBuilder();
-        boolean videPair = false;
-        int positionManoury = 1;
-        for (int i = 1; i <= 100; i++) {
-            if ((i % 2 == 0) == !videPair) {
-                String rep = "-";
-                if (getPion(positionManoury) != null) {
-                    rep = getPion(positionManoury).getRepresentation();
-                }
-                builder.append(rep);
-                positionManoury++;
-            } else {
-                builder.append("-");
-            }
-            if (i % 10 == 0) {
-                videPair = !videPair;
-                builder.append(SAUT_LIGNE);
-            }
-        }
-        return builder.toString();
     }
 }
