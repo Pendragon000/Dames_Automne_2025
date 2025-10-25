@@ -1,5 +1,6 @@
 package cstjean.mobile.dames;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -32,5 +33,10 @@ public class TestDame extends TestPion {
         } else {
             return REPRESENTATION_DAME_NOIRE;
         }
+    }
+
+    @Override
+    protected List<List<Integer>> getExpectedPositions(Pion pion) {
+        return List.of(List.of(1, 1), List.of(1, -1), List.of(-1, 1), List.of(-1, -1));
     }
 }

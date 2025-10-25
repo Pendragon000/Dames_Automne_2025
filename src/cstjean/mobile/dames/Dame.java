@@ -1,5 +1,6 @@
 package cstjean.mobile.dames;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -29,5 +30,10 @@ public class Dame extends Pion {
         } else {
             return "D";
         }
+    }
+
+    @Override
+    protected List<List<Integer>> getPosition() {
+        return List.of(List.of(1, 1), List.of(1, -1), List.of(-1, 1), List.of(-1, -1));
     }
 }

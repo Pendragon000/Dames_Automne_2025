@@ -1,7 +1,9 @@
 package cstjean.mobile.dames;
 
+import java.util.List;
 import java.util.Objects;
 import junit.framework.TestCase;
+import org.junit.Assert;
 
 /**
  * Class qui teste Pion.
@@ -26,15 +28,18 @@ public class TestPion extends TestCase {
         Pion pion1 = creerPion(Pion.CouleurPion.Noir);
         assertEquals("noir", pion1.getCouleur());
         assertEquals(getExpectedRepresentation(pion1), pion1.getRepresentation());
+        Assert.assertEquals(getExpectedPositions(pion1), pion1.getPosition());
 
         Pion pion2 = creerPion(Pion.CouleurPion.Blanc);
         assertEquals("blanc", pion2.getCouleur());
         assertEquals(getExpectedRepresentation(pion2), pion2.getRepresentation());
+        Assert.assertEquals(getExpectedPositions(pion2), pion2.getPosition());
 
         // Teste du constructeur sans argument.
         Pion pion3 = creerPion();
         assertEquals("blanc", pion3.getCouleur());
         assertEquals(getExpectedRepresentation(pion3), pion3.getRepresentation());
+        Assert.assertEquals(getExpectedPositions(pion3), pion3.getPosition());
     }
 
     /**
@@ -67,6 +72,20 @@ public class TestPion extends TestCase {
             return REPRESENTATION_PION_BLANC;
         } else {
             return REPRESENTATION_PION_NOIR;
+        }
+    }
+
+    /**
+     * Donne la list de position possible pour un pion.
+     *
+     * @param pion Le pion dont on veut la liste de position.
+     * @return La liste de position possible pour le pion.
+     */
+    protected List<List<Integer>> getExpectedPositions(Pion pion) {
+        if (pion.getCouleur().equals("blanc")) {
+            return List.of(List.of(-1, 1), List.of(-1, -1));
+        } else {
+            return List.of(List.of(1, 1), List.of(1, -1));
         }
     }
 }

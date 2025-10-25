@@ -1,5 +1,8 @@
 package cstjean.mobile.dames;
 
+import java.util.List;
+import java.util.Objects;
+
 /**
  * Classe d'un pion dans un jeu de dame.
  */
@@ -48,6 +51,32 @@ public class Pion {
     }
 
     /**
+     * Donne la liste de positions possible par le pion.
+     *
+     * @return Une liste de position que le pion peut se déplacer.
+     */
+    protected List<List<Integer>> getPosition() {
+        if (couleur == CouleurPion.Blanc) {
+            return List.of(List.of(-1, 1), List.of(-1, -1));
+        } else {
+            return List.of(List.of(1, 1), List.of(1, -1));
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() == this.getClass()) {
+            return ((Pion) o).getCouleur().equals(this.getCouleur());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(couleur);
+    }
+
+    /**
      * Énumération de la couleur de Pion.
      */
     protected enum CouleurPion {
@@ -69,6 +98,7 @@ public class Pion {
                 return "noir";
             }
         }
+
     }
 }
 
