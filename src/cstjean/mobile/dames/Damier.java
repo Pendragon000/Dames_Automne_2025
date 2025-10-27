@@ -3,6 +3,7 @@ package cstjean.mobile.dames;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * Classe Damier qui représente le damier d'un jeu de dame.
@@ -206,5 +207,32 @@ public class Damier {
             throw new IllegalArgumentException("Erreur de convertion entre la position 2D et la notation manoury");
         }
         return manoury;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Damier damier = (Damier) o;
+        return Objects.equals(pions, damier.pions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(pions);
+    }
+
+    /**
+     * Créer une copie du damier.
+     *
+     * @return Une copie du damier.
+     */
+    public Damier instantiate() {
+        Damier copie = new Damier();
+        for (int i = 1; i <= 50; i++) {
+            copie.ajoutPion(i, this.getPion(i));
+        }
+        return copie;
     }
 }

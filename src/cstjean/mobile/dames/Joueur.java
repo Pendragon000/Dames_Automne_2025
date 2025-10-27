@@ -14,34 +14,31 @@ public class Joueur {
      * La couleur de Pion que le joueur joue.
      */
     private final Pion.CouleurPion couleur;
+
     /**
-     * La partie dans laquel le joueur joue.
+     * Le nombre de points que le joueur a accumulée.
      */
-    private final Partie partie;
+    private int points = 0;
 
     /**
      * Construteur pour un joueur sans nom (nom automatique la couleur qu'il joue).
      *
      * @param couleur La couleur que le joueur joue.
-     * @param partie La partie dans laquel le joueur joue.
      */
-    protected Joueur(Pion.CouleurPion couleur, Partie partie) {
+    protected Joueur(Pion.CouleurPion couleur) {
         this.couleur = couleur;
         this.nom = couleur.toString();
-        this.partie = partie;
     }
 
     /**
      * Construteur pour un joueur par défault.
      *
      * @param couleur La couleur que le joueur joue.
-     * @param partie La partie dans laquel le joueur joue.
      * @param nom Le nom du joueur.
      */
-    protected Joueur(Pion.CouleurPion couleur, Partie partie, String nom) {
+    protected Joueur(Pion.CouleurPion couleur, String nom) {
         this.couleur = couleur;
         this.nom = nom;
-        this.partie = partie;
     }
 
     /**
@@ -61,8 +58,14 @@ public class Joueur {
     protected String getCouleur() {
         return couleur.toString();
     }
-    // TODO : deplacementPossible(positionPion, PositionTarget) : bool
-    // TODO : deplacement(positionPion, positionTargeted) : bool
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
     @Override
     public boolean equals(Object o) {

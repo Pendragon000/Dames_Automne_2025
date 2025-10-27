@@ -21,6 +21,7 @@ public class TestComplet {
         suite.addTestSuite(TestPartie.class);
         suite.addTestSuite(TestJoueur.class);
         suite.addTestSuite(TestRepresentationDamier.class);
+        suite.addTestSuite(TestHistorique.class);
         return suite;
     }
 }
