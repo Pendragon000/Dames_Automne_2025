@@ -33,6 +33,8 @@ public class TestDamier extends TestCase {
         Damier damier = new Damier();
         damier.initialiser();
         assertEquals(40, damier.getNombresPion());
+        assertEquals(20, damier.getNombresPionParCouleur(Pion.CouleurPion.Blanc));
+        assertEquals(20, damier.getNombresPionParCouleur(Pion.CouleurPion.Noir));
         for (int i = 1; i <= 50; i++) {
             if (i < 21) {
                 assertEquals("noir", damier.getPion(i).getCouleur());
@@ -123,5 +125,13 @@ public class TestDamier extends TestCase {
             }
         }
         Assert.assertArrayEquals(damier2D, damier.get2dArray());
+    }
+
+    /**
+     * Test la methode instantiate de la classe Damier.
+     */
+    public void testInstantiate() {
+        Damier damier = new Damier();
+        assertEquals(damier, damier.instantiate());
     }
 }

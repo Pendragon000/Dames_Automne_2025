@@ -66,6 +66,23 @@ public class Damier {
     }
 
     /**
+     * Donne le nombre de pion dans le damier selon la couleur donnée.
+     *
+     * @param couleur La couleur de pion qu'on veut le compte.
+     * @return Retourne le compte de pion de la couleur demandée.
+     */
+    protected int getNombresPionParCouleur(Pion.CouleurPion couleur) {
+        int nombresPion = 0;
+
+        for (Pion p : pions) {
+            if (p != null && p.getCouleur().equals(couleur.toString())) {
+                nombresPion++;
+            }
+        }
+        return nombresPion;
+    }
+
+    /**
      * Getter de base de la list pions.
      *
      * @param position La position Manoury du pion

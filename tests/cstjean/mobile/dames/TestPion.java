@@ -19,21 +19,23 @@ public class TestPion extends TestCase {
      * La représentation d'un pion noir.
      */
     protected static final String REPRESENTATION_PION_NOIR = "P";
+
     /**
      * Teste la création d'un pion.
      */
-
     public void testCreer() {
         // Teste du constructeur avec argument.
         Pion pion1 = creerPion(Pion.CouleurPion.Noir);
         assertEquals("noir", pion1.getCouleur());
         assertEquals(getExpectedRepresentation(pion1), pion1.getRepresentation());
         Assert.assertEquals(getExpectedPositions(pion1), pion1.getPosition());
+        Assert.assertEquals(pion1.getPosition(), List.of(List.of(1, 1), List.of(1, -1)));
 
         Pion pion2 = creerPion(Pion.CouleurPion.Blanc);
         assertEquals("blanc", pion2.getCouleur());
         assertEquals(getExpectedRepresentation(pion2), pion2.getRepresentation());
         Assert.assertEquals(getExpectedPositions(pion2), pion2.getPosition());
+        Assert.assertEquals(pion2.getPosition(), List.of(List.of(-1, 1), List.of(-1, -1)));
 
         // Teste du constructeur sans argument.
         Pion pion3 = creerPion();
