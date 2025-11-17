@@ -1,5 +1,7 @@
 package cstjean.mobile.dames;
 
+import static org.junit.Assert.assertNotEquals;
+
 import junit.framework.TestCase;
 
 /**
@@ -29,5 +31,27 @@ public class TestJoueur extends TestCase {
         assertEquals(0, joueur3.getPoints());
         joueur3.setPoints(5);
         assertEquals(5, joueur3.getPoints());
+    }
+
+    /**
+     * Test les methode Euquals et HashCode.
+     */
+    public void testEqualsHashCode() {
+
+        // Test pour égal
+        Joueur joueur1 = new Joueur(Pion.CouleurPion.Blanc);
+        Joueur joueur2 = new Joueur(Pion.CouleurPion.Blanc);
+        assertEquals(joueur1, joueur2);
+        assertEquals(joueur1.hashCode(), joueur2.hashCode());
+
+        // Test pour non égal
+        Joueur joueur3 = new Joueur(Pion.CouleurPion.Noir);
+        assertNotEquals(joueur1, joueur3);
+        assertNotEquals(joueur1.hashCode(), joueur3.hashCode());
+
+        // Test pour class non égal
+        Pion pion1 = new Pion(Pion.CouleurPion.Blanc);
+        assertNotEquals(joueur1, pion1);
+        assertNotEquals(joueur1.hashCode(), pion1.hashCode());
     }
 }

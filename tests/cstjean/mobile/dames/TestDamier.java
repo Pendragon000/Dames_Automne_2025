@@ -1,5 +1,7 @@
 package cstjean.mobile.dames;
 
+import static org.junit.Assert.assertNotEquals;
+
 import junit.framework.TestCase;
 import org.junit.Assert;
 
@@ -133,5 +135,27 @@ public class TestDamier extends TestCase {
     public void testInstantiate() {
         Damier damier = new Damier();
         assertEquals(damier, damier.instantiate());
+    }
+
+    /**
+     * Test les methodes Equals et HashCode.
+     */
+    public void testEqualsHashCode() {
+
+        // Test pour égal
+        Damier damier1 = new Damier();
+        Damier damier2 = new Damier();
+        assertEquals(damier1, damier2);
+        assertEquals(damier1.hashCode(), damier2.hashCode());
+
+        // Test pour non égal
+        damier2.initialiser();
+        assertNotEquals(damier1, damier2);
+        assertNotEquals(damier1.hashCode(), damier2.hashCode());
+
+        // Test pour class non égal
+        Pion pion1 = new Pion(Pion.CouleurPion.Blanc);
+        assertNotEquals(pion1, damier1);
+        assertNotEquals(pion1.hashCode(), damier1.hashCode());
     }
 }
