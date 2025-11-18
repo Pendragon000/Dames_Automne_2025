@@ -51,7 +51,8 @@ public class Pion {
     }
 
     /**
-     * Donne la liste de positions possible par le pion.
+     * Donne la liste de positions possible qui peut être exécuter par le pion.
+     * Accède aux positions relatives de déplacement et non la position du pion dans le damier.
      *
      * @return Une liste de position que le pion peut se déplacer.
      */

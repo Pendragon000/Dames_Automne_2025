@@ -1,16 +1,19 @@
 package cstjean.mobile.dames;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * Test pour la class Joueur.
  */
-public class TestJoueur extends TestCase {
+public class TestJoueur {
     /**
      * Test de création des joueurs avec les différents constructeurs.
      */
+    @Test
     public void testCreer() {
 
         Joueur joueur = new Joueur(Pion.CouleurPion.Blanc);
@@ -36,6 +39,7 @@ public class TestJoueur extends TestCase {
     /**
      * Test les methode Euquals et HashCode.
      */
+    @Test
     public void testEqualsHashCode() {
 
         // Test pour égal

@@ -4,13 +4,16 @@ import java.util.List;
 import java.util.Objects;
 import junit.framework.TestCase;
 import org.junit.Assert;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Class qui teste Pion.
  *
  * @author Isaak Fortin
  */
-public class TestPion extends TestCase {
+public class TestPion {
     /**
      * La représentation d'un pion blanc.
      */
@@ -23,34 +26,36 @@ public class TestPion extends TestCase {
     /**
      * Teste la création d'un pion.
      */
+    @Test
     public void testCreer() {
         // Teste du constructeur avec argument.
         Pion pion1 = creerPion(Pion.CouleurPion.Noir);
         assertEquals("noir", pion1.getCouleur());
         assertEquals(getExpectedRepresentation(pion1), pion1.getRepresentation());
-        Assert.assertEquals(getExpectedPositions(pion1), pion1.getPosition());
+        assertEquals(getExpectedPositions(pion1), pion1.getPosition());
 
         Pion pion2 = creerPion(Pion.CouleurPion.Blanc);
         assertEquals("blanc", pion2.getCouleur());
         assertEquals(getExpectedRepresentation(pion2), pion2.getRepresentation());
-        Assert.assertEquals(getExpectedPositions(pion2), pion2.getPosition());
+        assertEquals(getExpectedPositions(pion2), pion2.getPosition());
 
         // Teste du constructeur sans argument.
         Pion pion3 = creerPion();
         assertEquals("blanc", pion3.getCouleur());
         assertEquals(getExpectedRepresentation(pion3), pion3.getRepresentation());
-        Assert.assertEquals(getExpectedPositions(pion3), pion3.getPosition());
+        assertEquals(getExpectedPositions(pion3), pion3.getPosition());
     }
 
     /**
      * Methode qui test les euqals and HashCode des Pion.
      */
+    @Test
     public void testEqualsHashCode() {
         // Test pour égal
         Pion pion1 = creerPion(Pion.CouleurPion.Blanc);
         Pion pion2 = creerPion(Pion.CouleurPion.Blanc);
-        Assert.assertEquals(pion1, pion2);
-        Assert.assertEquals(pion1.hashCode(), pion2.hashCode());
+        assertEquals(pion1, pion2);
+        assertEquals(pion1.hashCode(), pion2.hashCode());
 
         // Test pour non égal
         Pion pion3 = creerPion(Pion.CouleurPion.Noir);
@@ -61,7 +66,7 @@ public class TestPion extends TestCase {
         Pion pion = new Pion();
         Dame dame = new Dame();
         Assert.assertNotEquals(pion, dame);
-        Assert.assertEquals(pion.hashCode(), dame.hashCode());
+        assertEquals(pion.hashCode(), dame.hashCode());
     }
 
     /**

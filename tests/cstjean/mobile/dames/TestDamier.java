@@ -1,20 +1,26 @@
 package cstjean.mobile.dames;
 
-import static org.junit.Assert.assertNotEquals;
-
 import junit.framework.TestCase;
 import org.junit.Assert;
+import org.junit.Test;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.NoSuchElementException;
+
+import static org.junit.Assert.*;
 
 /**
  * Class Test pour la Class Damier.
  *
  * @author Isaak Fortin
  */
-public class TestDamier extends TestCase {
+public class TestDamier {
 
     /**
      * Class qui teste la création du Damier.
      */
+    @Test
     public void testCreer() {
         Damier damier = new Damier();
         Pion pion1 = new Pion();
@@ -31,6 +37,7 @@ public class TestDamier extends TestCase {
     /**
      * Test l'initialisation d'un damier.
      */
+    @Test
     public void testInitialisation() {
         Damier damier = new Damier();
         damier.initialiser();
@@ -50,21 +57,22 @@ public class TestDamier extends TestCase {
     /**
      * Method test qui test le déplacement de pion dans le damier.
      */
+    @Test
     public void testDeplacement() {
         Damier damier = new Damier();
         damier.initialiser();
 
         // Déplacement d'un pion noir
         damier.deplacer(new int[]{3, 0}, new int[]{4, 1});
-        Assert.assertNull(damier.get2dArray()[3][0]);
+        assertNull(damier.get2dArray()[3][0]);
         Pion pionNoir = new Pion(Pion.CouleurPion.Noir);
-        Assert.assertEquals(pionNoir, damier.get2dArray()[4][1]);
+        assertEquals(pionNoir, damier.get2dArray()[4][1]);
 
         // Déplacement d'un pion blanc
         damier.deplacer(new int[]{6, 1}, new int[]{5, 0});
-        Assert.assertNull(damier.get2dArray()[6][1]);
+        assertNull(damier.get2dArray()[6][1]);
         Pion pionBlanc = new Pion(Pion.CouleurPion.Blanc);
-        Assert.assertEquals(pionBlanc, damier.get2dArray()[5][0]);
+        assertEquals(pionBlanc, damier.get2dArray()[5][0]);
 
         // Ajout d'une dame pour le test son déplacement
         damier = new Damier();
@@ -72,42 +80,52 @@ public class TestDamier extends TestCase {
 
         // Déplacement d'une dame
         damier.deplacer(new int[]{5, 4}, new int[]{6, 3});
-        Assert.assertNull(damier.get2dArray()[5][4]);
+        assertNull(damier.get2dArray()[5][4]);
         Dame dame = new Dame(Pion.CouleurPion.Blanc);
-        Assert.assertEquals(dame, damier.get2dArray()[6][3]);
+        assertEquals(dame, damier.get2dArray()[6][3]);
 
         damier.deplacer(new int[]{6, 3}, new int[]{5, 4});
-        Assert.assertNull(damier.get2dArray()[6][3]);
-        Assert.assertEquals(dame, damier.get2dArray()[5][4]);
+        assertNull(damier.get2dArray()[6][3]);
+        assertEquals(dame, damier.get2dArray()[5][4]);
+
+        damier.deplacer(new int[]{5, 4}, new int[]{9, 8});
+        assertNull(damier.get2dArray()[5][4]);
+        assertEquals(dame, damier.get2dArray()[9][8]);
+
+        damier.deplacer(new int[]{9, 8}, new int[]{1, 0});
+        assertNull(damier.get2dArray()[9][8]);
+        assertEquals(dame, damier.get2dArray()[1][0]);
     }
 
     /**
      * Methode qui teste les prises dans le damier.
      */
+    @Test
     public void testPrises() {
         Damier damier = new Damier();
         damier.ajoutPion(28, new Dame(Pion.CouleurPion.Blanc));
         damier.ajoutPion(33, new Pion(Pion.CouleurPion.Noir));
 
         // Prise avec dame
-        Assert.assertEquals(new Pion(Pion.CouleurPion.Noir), damier.get2dArray()[6][5]);
+        assertEquals(new Pion(Pion.CouleurPion.Noir), damier.get2dArray()[6][5]);
         damier.deplacer(new int[]{5, 4}, new int[]{7, 6});
-        Assert.assertNull(damier.get2dArray()[5][4]);
+        assertNull(damier.get2dArray()[5][4]);
         Dame dame = new Dame(Pion.CouleurPion.Blanc);
         assertNull(damier.get2dArray()[6][5]);
-        Assert.assertEquals(dame, damier.get2dArray()[7][6]);
+        assertEquals(dame, damier.get2dArray()[7][6]);
 
         damier.ajoutPion(33, new Pion(Pion.CouleurPion.Noir));
-        Assert.assertEquals(new Pion(Pion.CouleurPion.Noir), damier.get2dArray()[6][5]);
+        assertEquals(new Pion(Pion.CouleurPion.Noir), damier.get2dArray()[6][5]);
         damier.deplacer(new int[]{7, 6}, new int[]{5, 4});
-        Assert.assertNull(damier.get2dArray()[7][6]);
+        assertNull(damier.get2dArray()[7][6]);
         assertNull(damier.get2dArray()[6][5]);
-        Assert.assertEquals(dame, damier.get2dArray()[5][4]);
+        assertEquals(dame, damier.get2dArray()[5][4]);
     }
 
     /**
      * Test la création de l'array 2d du damier.
      */
+    @Test
     public void test2dArray() {
         Damier damier = new Damier();
         damier.initialiser();
@@ -132,6 +150,7 @@ public class TestDamier extends TestCase {
     /**
      * Test la methode instantiate de la classe Damier.
      */
+    @Test
     public void testInstantiate() {
         Damier damier = new Damier();
         assertEquals(damier, damier.instantiate());
@@ -140,22 +159,70 @@ public class TestDamier extends TestCase {
     /**
      * Test les methodes Equals et HashCode.
      */
+    @Test
     public void testEqualsHashCode() {
+        Damier damierA = new Damier();
+        Damier damierB = new Damier();
+        assertEquals(damierA, damierB);
+        assertEquals(damierA.hashCode(), damierB.hashCode());
+        Damier damierC = new Damier();
+        damierC.initialiser();
+        assertNotEquals(damierA, damierC);
+        // Réflexivité
+        assertEquals(damierA, damierA);
+        assertEquals(damierB, damierA);
+        // Transitivité
+        Damier damierD = new Damier();
+        assertEquals(damierB, damierD);
+        assertEquals(damierA, damierD);
+        // Constance
+        assertEquals(damierA, damierB);
+        // Comparaison à null
+        // LINT : jUnit n'appelle pas le equal si on envoit null donc on veut comparer directement
+        // On veut vraiment tester le null ici...
+        assertFalse(damierA.equals(null));
+        // Validation
+        assertNotEquals("BLABLABLA", damierA);
+    }
 
-        // Test pour égal
-        Damier damier1 = new Damier();
-        Damier damier2 = new Damier();
-        assertEquals(damier1, damier2);
-        assertEquals(damier1.hashCode(), damier2.hashCode());
+    /**
+     * Test le bon fonctionnement de l'exception lorsqu'on tente
+     * de convertir une case blanche en notation manoury.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testManouryTo2dPositionCaseBlanche() {
+        Damier damier = new Damier();
+        damier.getManouryFrom2dPosition(10, 0);
+    }
 
-        // Test pour non égal
-        damier2.initialiser();
-        assertNotEquals(damier1, damier2);
-        assertNotEquals(damier1.hashCode(), damier2.hashCode());
+    /**
+     * Test le bon fonctionnement de l'exception lorsqu'on tente
+     * de get les déplacements valid d'un case vide.
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void testGetValidMovesPionNull() {
+        Damier damier = new Damier();
+        damier.getValidMoves(new int[]{5, 4});
+    }
 
-        // Test pour class non égal
-        Pion pion1 = new Pion(Pion.CouleurPion.Blanc);
-        assertNotEquals(pion1, damier1);
-        assertNotEquals(pion1.hashCode(), damier1.hashCode());
+    /**
+     * Test le bon fonctionnement de l'exception lorsqu'on tente
+     * de déplacer un pion d'une case vide.
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void testDeplacerPionNull() {
+        Damier damier = new Damier();
+        damier.deplacer(new int[]{5, 4}, new int[]{5, 4});
+    }
+
+    /**
+     * Test le bon fonctionnement de l'exception lorsqu'on tente
+     * de déplacer un pion d'une case vide.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testDeplacerMouvementInvalide() {
+        Damier damier = new Damier();
+        damier.ajoutPion(damier.getManouryFrom2dPosition(5, 4), new Pion());
+        damier.deplacer(new int[]{5, 4}, new int[]{5, 4});
     }
 }

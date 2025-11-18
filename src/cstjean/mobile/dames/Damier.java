@@ -219,10 +219,6 @@ public class Damier {
         int offset = (x % 2 == 0) ? (y - 1) / 2 : y / 2;
         int manoury = base + offset + 1;
 
-        // Vérifie si la convertion manoury est valide.
-        if (getPion(manoury) != get2dArray()[x][y]) {
-            throw new IllegalArgumentException("Erreur de convertion entre la position 2D et la notation manoury");
-        }
         return manoury;
     }
 

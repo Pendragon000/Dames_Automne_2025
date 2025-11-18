@@ -1,27 +1,26 @@
 package cstjean.mobile.dames;
 
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+
+
 
 /**
  * Suite de test qui test toutes les classes.
  *
  * @author Isaak Fortin
  */
+@RunWith(Suite.class)
+
+@Suite.SuiteClasses({
+    TestDamier.class,
+    TestPion.class,
+    TestDamier.class,
+    TestPartie.class,
+    TestJoueur.class,
+    TestRepresentationDamier.class,
+    TestHistorique.class
+})
 public class TestComplet {
-    /**
-     * TestSuite de la Suite TestComplet.
-     *
-     * @return La suite
-     */
-    public static TestSuite suite() {
-        TestSuite suite = new TestSuite();
-        suite.addTestSuite(TestDamier.class);
-        suite.addTestSuite(TestPion.class);
-        suite.addTestSuite(TestDamier.class);
-        suite.addTestSuite(TestPartie.class);
-        suite.addTestSuite(TestJoueur.class);
-        suite.addTestSuite(TestRepresentationDamier.class);
-        suite.addTestSuite(TestHistorique.class);
-        return suite;
-    }
+
 }

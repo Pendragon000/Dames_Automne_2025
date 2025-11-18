@@ -1,16 +1,17 @@
 package cstjean.mobile.dames;
 
-import junit.framework.TestCase;
 import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Class de test pour la class d'historique.
  */
-public class TestHistorique extends TestCase {
+public class TestHistorique {
 
     /**
      * Test la création simple d'un historique de damier.
      */
+    @Test
     public void testCreer() {
         Damier damier = new Damier();
         Historique historique = new Historique();

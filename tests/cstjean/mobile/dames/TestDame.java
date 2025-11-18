@@ -1,5 +1,6 @@
 package cstjean.mobile.dames;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,6 +38,15 @@ public class TestDame extends TestPion {
 
     @Override
     protected List<List<Integer>> getExpectedPositions(Pion pion) {
-        return List.of(List.of(1, 1), List.of(1, -1), List.of(-1, 1), List.of(-1, -1));
+        List<List<Integer>> moves = new ArrayList<>();
+
+        for (int i = 1; i <= 10; i++) {
+            moves.add(List.of(i, i));
+            moves.add(List.of(i, -i));
+            moves.add(List.of(-i, i));
+            moves.add(List.of(-i, -i));
+        }
+
+        return moves;
     }
 }
