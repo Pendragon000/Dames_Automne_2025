@@ -63,11 +63,9 @@ public class Partie {
             if (Objects.equals(joueur.getCouleur(), Pion.CouleurPion.Blanc.toString())) {
                 nbBlanc++;
                 joueurBlanc = joueur;
-            } else if (Objects.equals(joueur.getCouleur(), Pion.CouleurPion.Noir.toString())) {
+            } else {
                 nbNoir++;
                 joueurNoir = joueur;
-            } else {
-                throw new IllegalArgumentException("Couleur de joueur invalide : " + joueur.getCouleur());
             }
         }
 
@@ -265,7 +263,7 @@ public class Partie {
             // Vérifie promotion pour les noirs
             if (arr2d[9][i] != null) {
                 if (arr2d[9][i].getCouleur().equals(Pion.CouleurPion.Noir.toString())) {
-                    damier.ajoutPion(getManouryFrom2dPosition(0, i), new Dame(Pion.CouleurPion.Noir));
+                    damier.ajoutPion(getManouryFrom2dPosition(9, i), new Dame(Pion.CouleurPion.Noir));
                 }
             }
         }

@@ -1,14 +1,13 @@
 package cstjean.mobile.dames;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+
+import java.util.NoSuchElementException;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.NoSuchElementException;
-
-import static org.junit.Assert.*;
 
 /**
  * Class Test pour la Class Damier.
@@ -180,7 +179,7 @@ public class TestDamier {
         // Comparaison à null
         // LINT : jUnit n'appelle pas le equal si on envoit null donc on veut comparer directement
         // On veut vraiment tester le null ici...
-        assertFalse(damierA.equals(null));
+        assertNotEquals(null, damierA);
         // Validation
         assertNotEquals("BLABLABLA", damierA);
     }

@@ -1,19 +1,17 @@
 package cstjean.mobile.dames;
 
-import java.util.List;
-import junit.framework.TestCase;
-import org.junit.Assert;
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+
+import java.util.List;
+import org.junit.Test;
 
 /**
  * Test pour la class Partie.
  */
 public class TestPartie {
     /**
-     * Test de création d'une partie avec les différent constructeur.
+     * Test de création d'une partie avec les différents constructeurs.
      */
     @Test
     public void testCreer() {
@@ -40,6 +38,43 @@ public class TestPartie {
         assertEquals(joueur4, partie1.getJoueur("Joueur4"));
         assertEquals(joueur3, partie1.getJoueurCourant());
         assertEquals(0, partie1.getIndexJoueurCourant());
+    }
+
+    /**
+     * Test l'exception envoyée quand on tente de creer une partie avec un nombre invalide de joueurs.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testTropJoueurException() {
+        Joueur joueur1 = new Joueur(Pion.CouleurPion.Blanc);
+        new Partie(new Damier(), List.of(joueur1));
+    }
+
+    /**
+     * Test l'exception envoyée quand on tente de creer une partie avec un nombre de couleurs invalide.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testMauvaiseCouleurException() {
+        Joueur joueur1 = new Joueur(Pion.CouleurPion.Blanc);
+        Joueur joueur2 = new Joueur(Pion.CouleurPion.Blanc);
+        new Partie(new Damier(), List.of(joueur1, joueur2));
+    }
+
+    /**
+     * Test pour le retour d'un objet null lorsqu'on cherche pour un joueur avec un nom invalide.
+     */
+    @Test
+    public void testGetJoueurParNomNull() {
+        String nomJoueur = "Joueur";
+        String nomInvalide = "nomInvalide";
+
+        Joueur joueur = new Joueur(Pion.CouleurPion.Blanc, nomJoueur);
+        Joueur joueur2 = new Joueur(Pion.CouleurPion.Noir);
+
+        Partie partie = new Partie(new Damier(), List.of(joueur, joueur2));
+
+        assertEquals(nomJoueur, joueur.getNom());
+        assertEquals(joueur, partie.getJoueur(nomJoueur));
+        assertNull(partie.getJoueur(nomInvalide));
     }
 
     /**
@@ -146,6 +181,70 @@ public class TestPartie {
         assertNull(partie.get2dArray()[7][6]);
         assertNull(partie.get2dArray()[6][5]);
         assertEquals(dame, partie.get2dArray()[5][4]);
+    }
+
+    /**
+     * Test l'exception envoyée quand on tente de déplacer un pion lorsque la partie est terminée.
+     */
+    @Test(expected = IllegalStateException.class)
+    public void testDeplacementPartieTerminer() {
+        Damier damier = new Damier();
+        damier.ajoutPion(damier.getManouryFrom2dPosition(5, 4), new Pion(Pion.CouleurPion.Noir));
+        damier.ajoutPion(damier.getManouryFrom2dPosition(6, 5), new Pion(Pion.CouleurPion.Blanc));
+
+        Partie partie = new Partie(damier);
+        partie.getJoueur(1).setPoints(20);
+        partie.prochainJoueur();
+        partie.deplacer(new int[]{5, 4}, new int[]{7, 6});
+        partie.prochainJoueur();
+        partie.deplacer(new int[]{7, 6}, new int[]{8, 7});
+    }
+
+    /**
+     * Test l'exception envoyée quand on tente de déplacer un pion lorsque la partie est terminée.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testDeplacementCouleurInvalide() {
+        Damier damier = new Damier();
+        damier.ajoutPion(damier.getManouryFrom2dPosition(5, 4), new Pion(Pion.CouleurPion.Noir));
+        damier.ajoutPion(damier.getManouryFrom2dPosition(6, 5), new Pion(Pion.CouleurPion.Blanc));
+
+        Partie partie = new Partie(damier);
+        partie.deplacer(new int[]{5, 4}, new int[]{7, 6});
+    }
+
+    @Test
+    public void testDeplacementPromotion() {
+        Damier damier = new Damier();
+        Pion pionN = new Pion(Pion.CouleurPion.Noir);
+        Pion pionB = new Pion(Pion.CouleurPion.Blanc);
+        damier.ajoutPion(damier.getManouryFrom2dPosition(8, 5), pionN);
+        damier.ajoutPion(damier.getManouryFrom2dPosition(1, 6), pionB);
+
+        Partie partie = new Partie(damier);
+
+        // Promotion Pion blanc
+        assertEquals(pionB, partie.get2dArray()[1][6]);
+        partie.deplacer(new int[]{1, 6}, new int[]{0, 7});
+        assertEquals(new Dame(Pion.CouleurPion.Blanc), partie.get2dArray()[0][7]);
+
+        // Promotion Pion noir
+        assertEquals(pionN, partie.get2dArray()[8][5]);
+        partie.deplacer(new int[]{8, 5}, new int[]{9, 6});
+        assertEquals(new Dame(Pion.CouleurPion.Noir), partie.get2dArray()[9][6]);
+    }
+
+    /**
+     * Test l'exception envoyée quand on tente de déplacer un pion lorsque la partie est terminée.
+     */
+    @Test(expected = IllegalStateException.class)
+    public void testDeplacementInvalide() {
+        Damier damier = new Damier();
+        damier.ajoutPion(damier.getManouryFrom2dPosition(5, 4), new Pion(Pion.CouleurPion.Noir));
+        damier.ajoutPion(damier.getManouryFrom2dPosition(6, 5), new Pion(Pion.CouleurPion.Blanc));
+
+        Partie partie = new Partie(damier);
+        partie.deplacer(new int[]{6, 5}, new int[]{5, 4});
     }
 
     /**

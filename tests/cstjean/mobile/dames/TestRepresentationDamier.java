@@ -1,9 +1,8 @@
 package cstjean.mobile.dames;
 
-import junit.framework.TestCase;
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 /**
  * Class de test pour ReprsesentationDamier.

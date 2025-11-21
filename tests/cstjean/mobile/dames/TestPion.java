@@ -1,12 +1,11 @@
 package cstjean.mobile.dames;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 import java.util.Objects;
-import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Class qui teste Pion.

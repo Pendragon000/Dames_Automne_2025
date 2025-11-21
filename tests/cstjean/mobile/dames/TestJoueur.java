@@ -3,7 +3,6 @@ package cstjean.mobile.dames;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import junit.framework.TestCase;
 import org.junit.Test;
 
 /**
