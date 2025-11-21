@@ -179,7 +179,7 @@ public class TestDamier {
         // Comparaison à null
         // LINT : jUnit n'appelle pas le equal si on envoit null donc on veut comparer directement
         // On veut vraiment tester le null ici...
-        assertNotEquals(null, damierA);
+        assertFalse(damierA.equals(null));
         // Validation
         assertNotEquals("BLABLABLA", damierA);
     }
