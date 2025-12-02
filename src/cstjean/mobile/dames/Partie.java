@@ -80,6 +80,7 @@ public class Partie {
         this.joueurs.add(1, joueurNoir);
         this.indexJoueurCourant = 0;
         this.estTerminer = false;
+        save("");
     }
 
     /**
@@ -138,9 +139,11 @@ public class Partie {
 
     /**
      * Sauvegarde le damier de la partie dans l'historique.
+     *
+     * @param manouryLog Le text du mouvement effectuer annoté en notation Manoury.
      */
-    protected void save() {
-        historique.save(damier.instantiate());
+    protected void save(String manouryLog) {
+        historique.save(damier.instantiate(), manouryLog);
     }
 
     /**
@@ -167,6 +170,7 @@ public class Partie {
         indexJoueurCourant = 0;
         estTerminer = false;
         historique = new Historique();
+        save("");
     }
 
     /**
@@ -225,18 +229,33 @@ public class Partie {
         // Stock le nombre pion avant le déplacement.
         Pion.CouleurPion couleurAdv = (getJoueurCourant().getCouleur().equals(Pion.CouleurPion.Blanc.toString())) ?
                 Pion.CouleurPion.Noir : Pion.CouleurPion.Blanc;
-        int pionNbAvantPrise = damier.getNombresPionParCouleur(couleurAdv);
+        final int pionNbAvantPrise = damier.getNombresPionParCouleur(couleurAdv);
 
-        // Garde en historique le damier avant le mouvement.
-        save();
-
-        // Effectue le déplacement.
         try {
             damier.deplacer(pionPos, targetPos);
         } catch (Exception e) {
             undo();
             throw new IllegalStateException("Mouvement impossible: " + e.getMessage());
         }
+
+        StringBuilder logEntry = new StringBuilder();
+        logEntry.append("\n");
+        if (Objects.equals(getJoueurCourant().getCouleur(), Pion.CouleurPion.Blanc.toString())) {
+            logEntry.append("(");
+        }
+        logEntry.append(getManouryFrom2dPosition(pionPos[0], pionPos[1]));
+        if (pionNbAvantPrise != damier.getNombresPion()) {
+            logEntry.append("x");
+        } else {
+            logEntry.append("-");
+        }
+        logEntry.append(getManouryFrom2dPosition(targetPos[0], targetPos[1]));
+        if (Objects.equals(getJoueurCourant().getCouleur(), Pion.CouleurPion.Blanc.toString())) {
+            logEntry.append(")");
+        }
+
+        // Garde en historique le damier avant le mouvement.
+        save(logEntry.toString());
 
         // Donne les points au joueur courants si une prise a pris place.
         if (pionNbAvantPrise != damier.getNombresPionParCouleur(couleurAdv)) {

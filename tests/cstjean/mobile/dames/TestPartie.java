@@ -102,7 +102,7 @@ public class TestPartie {
     public void testHistorique() {
         Partie partie = new Partie(new Damier());
         partie.initialiser();
-        partie.save();
+        partie.save("32x32");
 
         for (int i = 1; i <= 50; i++) {
             assertEquals(partie.getPion(i), partie.peekHistorique().getPion(i));
@@ -110,7 +110,7 @@ public class TestPartie {
         partie.prochainJoueur();
         partie.deplacer(new int[]{3, 0}, new int[]{4, 1});
         final Damier damier1 = partie.peekHistorique();
-        partie.save();
+        partie.save("32x32");
         for (int i = 1; i <= 50; i++) {
             assertEquals(partie.getPion(i), partie.peekHistorique().getPion(i));
         }
