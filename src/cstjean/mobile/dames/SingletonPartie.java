@@ -173,4 +173,13 @@ public class SingletonPartie {
     public List<List<Integer>> getValidMoves(int[] pionPos) {
         return partie.getValidMoves(pionPos);
     }
+
+    /**
+     * Donne l'historique des mouvements en text.
+     *
+     * @return L'historique en text selon la notation Manoury.
+     */
+    protected String getTextLog() {
+        return partie.getTextLog();
+    }
 }

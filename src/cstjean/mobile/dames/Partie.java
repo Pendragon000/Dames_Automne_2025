@@ -299,4 +299,13 @@ public class Partie {
     protected List<List<Integer>> getValidMoves(int[] pionPos) {
         return damier.getValidMoves(pionPos);
     }
+
+    /**
+     * Donne l'historique des mouvements en text.
+     *
+     * @return L'historique en text selon la notation Manoury.
+     */
+    protected String getTextLog() {
+        return historique.getLog();
+    }
 }

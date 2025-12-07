@@ -25,6 +25,7 @@ public class TestPartie {
         assertEquals(joueur2, partie.getJoueur(1));
         assertEquals(joueur2, partie.getJoueur("noir"));
         assertEquals(joueur1, partie.getJoueur("blanc"));
+        assertEquals("---- Logs ----", partie.getTextLog());
         assertEquals(joueur1, partie.getJoueurCourant());
         assertEquals(0, partie.getIndexJoueurCourant());
 
@@ -36,6 +37,7 @@ public class TestPartie {
         assertEquals(joueur4, partie1.getJoueur(1));
         assertEquals(joueur3, partie1.getJoueur("Joueur3"));
         assertEquals(joueur4, partie1.getJoueur("Joueur4"));
+        assertEquals("---- Logs ----", partie1.getTextLog());
         assertEquals(joueur3, partie1.getJoueurCourant());
         assertEquals(0, partie1.getIndexJoueurCourant());
     }

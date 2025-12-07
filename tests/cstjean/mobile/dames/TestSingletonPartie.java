@@ -28,12 +28,14 @@ public class TestSingletonPartie {
         assertEquals(joueur4, singleton1.getJoueur(1));
         assertEquals(joueur3, singleton1.getJoueur("Joueur3"));
         assertEquals(joueur4, singleton1.getJoueur("Joueur4"));
+        assertEquals("---- Logs ----", singleton1.getTextLog());
         assertEquals(joueur3, singleton1.getJoueurCourant());
         assertEquals(0, singleton1.getIndexJoueurCourant());
         assertEquals(joueur3, singleton2.getJoueur(0));
         assertEquals(joueur4, singleton2.getJoueur(1));
         assertEquals(joueur3, singleton2.getJoueur("Joueur3"));
         assertEquals(joueur4, singleton2.getJoueur("Joueur4"));
+        assertEquals("---- Logs ----", singleton2.getTextLog());
         assertEquals(joueur3, singleton2.getJoueurCourant());
         assertEquals(0, singleton2.getIndexJoueurCourant());
     }
