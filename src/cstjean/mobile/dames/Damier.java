@@ -186,17 +186,25 @@ public class Damier {
 
             // Vérifie qu'un pion n'est pas à la position
             if (getPion(getManouryFrom2dPosition(x, y)) != null) {
+                int hopX = x + move.get(0);
+                int hopY = y + move.get(1);
+
+                // Vérifie que l'index est pas out of bounds
+                if (hopX > 9 || hopX < 0 || hopY > 9 || hopY < 0) {
+                    continue;
+                }
+
                 // Vérifie que le pion de ne prend pas un pion de la même couleur
                 if (Objects.equals(pion.getCouleur(), getPion(getManouryFrom2dPosition(x, y)).getCouleur())) {
                     continue;
                 }
 
                 // Vérifie le prochain hop pour une prise possible
-                if (getPion(getManouryFrom2dPosition(x + move.get(0), y + move.get(1))) != null) {
+                if (getPion(getManouryFrom2dPosition(hopX, hopY)) != null) {
                     continue;
                 }
 
-                // Change le validMove pour inclure le next hop
+                // Change le validMove pour inclure le nect hop
                 x += move.get(0);
                 y += move.get(1);
             }
