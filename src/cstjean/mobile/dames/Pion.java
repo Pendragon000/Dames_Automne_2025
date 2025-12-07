@@ -33,7 +33,7 @@ public class Pion {
      *
      * @return La couleur du pion en String.
      */
-    protected String getCouleur() {
+    public String getCouleur() {
         return couleur.toString();
     }
 
