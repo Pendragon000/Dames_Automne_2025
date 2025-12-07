@@ -254,4 +254,12 @@ public class TestPartie {
     public void test2dToManoury() {
         assertEquals(5, new Partie(new Damier()).getManouryFrom2dPosition(0, 9));
     }
+
+    @Test
+    public void testgetValidMoves() {
+        Damier damier = new Damier();
+        Partie partie = new Partie(damier);
+        partie.initialiser();
+        assertEquals(damier.getValidMoves(new int[]{0, 1}), partie.getValidMoves(new int[]{0, 1}));
+    }
 }

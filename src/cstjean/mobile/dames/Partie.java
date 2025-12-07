@@ -289,4 +289,14 @@ public class Partie {
 
         prochainJoueur();
     }
+
+    /**
+     * Donne la liste de déplacement possible pour un pion.
+     *
+     * @param pionPos La position du pion dont on veut les déplacements valides.
+     * @return Une liste de position dont le pion peut se déplacer à
+     */
+    protected List<List<Integer>> getValidMoves(int[] pionPos) {
+        return damier.getValidMoves(pionPos);
+    }
 }

@@ -191,8 +191,11 @@ public class Damier {
                 if (getPion(getManouryFrom2dPosition(x + move.get(0), y + move.get(1))) != null) {
                     continue;
                 }
+                if (Objects.equals(pion.getCouleur(), getPion(getManouryFrom2dPosition(x, y)).getCouleur())) {
+                    continue;
+                }
 
-                // Change le validMove pour inclure le nect hop
+                // Change le validMove pour inclure le next hop
                 x += move.get(0);
                 y += move.get(1);
             }
@@ -217,9 +220,8 @@ public class Damier {
         }
         int base = x * 5;
         int offset = (x % 2 == 0) ? (y - 1) / 2 : y / 2;
-        int manoury = base + offset + 1;
 
-        return manoury;
+        return base + offset + 1;
     }
 
     @Override
