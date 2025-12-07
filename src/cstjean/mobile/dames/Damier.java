@@ -195,9 +195,6 @@ public class Damier {
                 if (getPion(getManouryFrom2dPosition(x + move.get(0), y + move.get(1))) != null) {
                     continue;
                 }
-                if (Objects.equals(pion.getCouleur(), getPion(getManouryFrom2dPosition(x, y)).getCouleur())) {
-                    continue;
-                }
 
                 // Change le validMove pour inclure le next hop
                 x += move.get(0);
