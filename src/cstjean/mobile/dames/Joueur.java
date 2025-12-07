@@ -46,7 +46,7 @@ public class Joueur {
      *
      * @return Le nom du joueur.
      */
-    protected String getNom() {
+    public String getNom() {
         return nom;
     }
 
