@@ -179,7 +179,7 @@ public class SingletonPartie {
      *
      * @return L'historique en text selon la notation Manoury.
      */
-    protected String getTextLog() {
+    public String getTextLog() {
         return partie.getTextLog();
     }
 }
