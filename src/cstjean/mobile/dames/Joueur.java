@@ -55,7 +55,7 @@ public class Joueur {
      *
      * @return La couleur en string que le joueur joue.
      */
-    protected String getCouleur() {
+    public String getCouleur() {
         return couleur.toString();
     }
 
