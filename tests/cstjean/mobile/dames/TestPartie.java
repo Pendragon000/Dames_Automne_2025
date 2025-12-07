@@ -1,6 +1,7 @@
 package cstjean.mobile.dames;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class TestPartie {
         assertEquals(joueur2, partie.getJoueur("noir"));
         assertEquals(joueur1, partie.getJoueur("blanc"));
         assertEquals("---- Logs ----", partie.getTextLog());
+        assertFalse(partie.estTerminer());
         assertEquals(joueur1, partie.getJoueurCourant());
         assertEquals(0, partie.getIndexJoueurCourant());
 
@@ -38,6 +40,7 @@ public class TestPartie {
         assertEquals(joueur3, partie1.getJoueur("Joueur3"));
         assertEquals(joueur4, partie1.getJoueur("Joueur4"));
         assertEquals("---- Logs ----", partie1.getTextLog());
+        assertFalse(partie1.estTerminer());
         assertEquals(joueur3, partie1.getJoueurCourant());
         assertEquals(0, partie1.getIndexJoueurCourant());
     }

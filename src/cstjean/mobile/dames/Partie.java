@@ -308,4 +308,13 @@ public class Partie {
     protected String getTextLog() {
         return historique.getLog();
     }
+
+    /**
+     * Indique si la partie est terminé.
+     *
+     * @return Un boolean si la partie est terminé.
+     */
+    protected boolean estTerminer() {
+        return estTerminer;
+    }
 }

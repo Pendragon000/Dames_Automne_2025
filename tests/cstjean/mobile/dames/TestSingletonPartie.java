@@ -1,6 +1,7 @@
 package cstjean.mobile.dames;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class TestSingletonPartie {
         assertEquals(joueur3, singleton1.getJoueur("Joueur3"));
         assertEquals(joueur4, singleton1.getJoueur("Joueur4"));
         assertEquals("---- Logs ----", singleton1.getTextLog());
+        assertFalse(singleton1.estTerminer());
         assertEquals(joueur3, singleton1.getJoueurCourant());
         assertEquals(0, singleton1.getIndexJoueurCourant());
         assertEquals(joueur3, singleton2.getJoueur(0));
@@ -36,6 +38,7 @@ public class TestSingletonPartie {
         assertEquals(joueur3, singleton2.getJoueur("Joueur3"));
         assertEquals(joueur4, singleton2.getJoueur("Joueur4"));
         assertEquals("---- Logs ----", singleton2.getTextLog());
+        assertFalse(singleton2.estTerminer());
         assertEquals(joueur3, singleton2.getJoueurCourant());
         assertEquals(0, singleton2.getIndexJoueurCourant());
     }

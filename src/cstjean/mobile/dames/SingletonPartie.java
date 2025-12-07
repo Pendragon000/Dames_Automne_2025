@@ -182,4 +182,13 @@ public class SingletonPartie {
     public String getTextLog() {
         return partie.getTextLog();
     }
+
+    /**
+     * Indique si la partie est terminé.
+     *
+     * @return Un boolean si la partie est terminé.
+     */
+    public boolean estTerminer() {
+        return partie.estTerminer();
+    }
 }
