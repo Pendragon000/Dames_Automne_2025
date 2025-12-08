@@ -109,6 +109,7 @@ public class TestSingletonPartie {
 
         // Ajout d'une dame pour le test son déplacement
         Damier damier = new Damier();
+        damier.ajoutPion(1, new Pion(Pion.CouleurPion.Noir));
         damier.ajoutPion(28, new Dame(Pion.CouleurPion.Blanc));
         partie.creerNewPartie(damier, List.of(new Joueur(Pion.CouleurPion.Blanc), new Joueur(Pion.CouleurPion.Noir)));
 
@@ -130,6 +131,7 @@ public class TestSingletonPartie {
     public void testPrises() {
         Damier damier1 = new Damier();
         damier1.ajoutPion(28, new Dame(Pion.CouleurPion.Blanc));
+        damier1.ajoutPion(1, new Pion(Pion.CouleurPion.Noir));
         damier1.ajoutPion(33, new Pion(Pion.CouleurPion.Noir));
         SingletonPartie partie = SingletonPartie.getInstance();
         partie.creerNewPartie(damier1, List.of(new Joueur(Pion.CouleurPion.Blanc), new Joueur(Pion.CouleurPion.Noir)));

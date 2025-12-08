@@ -148,6 +148,7 @@ public class TestPartie {
 
         // Ajout d'une dame pour le test son déplacement
         Damier damier = new Damier();
+        damier.ajoutPion(1, new Pion(Pion.CouleurPion.Noir));
         damier.ajoutPion(28, new Dame(Pion.CouleurPion.Blanc));
         partie = new Partie(damier);
 
@@ -168,6 +169,7 @@ public class TestPartie {
     @Test
     public void testPrises() {
         Damier damier1 = new Damier();
+        damier1.ajoutPion(1, new Pion(Pion.CouleurPion.Noir));
         damier1.ajoutPion(28, new Dame(Pion.CouleurPion.Blanc));
         damier1.ajoutPion(33, new Pion(Pion.CouleurPion.Noir));
         Partie partie = new Partie(damier1);

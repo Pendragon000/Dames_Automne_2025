@@ -268,6 +268,26 @@ public class Partie {
             estTerminer = true;
         }
 
+        Pion[][] board = get2dArray();
+        boolean advPeutJouer = false;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                boolean tileIsWhite = (i + j) % 2 == 0;
+                if (!tileIsWhite && board[i][j] != null) {
+                    if (Objects.equals(board[i][j].getCouleur(), couleurAdv.toString())) {
+                        if (!getValidMoves(new int[]{i, j}).isEmpty()) {
+                            advPeutJouer = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!advPeutJouer) {
+            estTerminer = true;
+        }
+
         // Vérifie si on a besoin de promouvoir un pion.
         Pion[][] arr2d = get2dArray();
         for (int i = 0; i < 10; i++) {
