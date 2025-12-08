@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -223,5 +224,26 @@ public class TestDamier {
         Damier damier = new Damier();
         damier.ajoutPion(damier.getManouryFrom2dPosition(5, 4), new Pion());
         damier.deplacer(new int[]{5, 4}, new int[]{5, 4});
+    }
+
+    /**
+     * Test que les diagonales sont bloquées avoir rencontré un pion.
+     */
+    @Test
+    public void testDeplacerDameDiagonalBloquer() {
+        Damier damier = new Damier();
+        // 5,4
+        damier.ajoutPion(28, new Dame());
+        // 4,3
+        damier.ajoutPion(22, new Pion(Pion.CouleurPion.Noir));
+        // 4,5
+        damier.ajoutPion(23, new Pion(Pion.CouleurPion.Noir));
+        // 6,3
+        damier.ajoutPion(32, new Pion(Pion.CouleurPion.Noir));
+        // 6,5
+        damier.ajoutPion(33, new Pion(Pion.CouleurPion.Noir));
+        List<List<Integer>> expectedMouvementValide = List.of(List.of(7, 6), List.of(7, 2),
+                List.of(3, 6), List.of(3, 2));
+        assertEquals(expectedMouvementValide, damier.getValidMoves(new int[]{5, 4}));
     }
 }

@@ -164,6 +164,10 @@ public class Damier {
     protected List<List<Integer>> getValidMoves(int[] pionPos) throws NoSuchElementException {
         List<List<Integer>> validMoves = new ArrayList<>();
         int pionManouryIndex = getManouryFrom2dPosition(pionPos[0], pionPos[1]);
+        boolean blockedNorthEast = false;
+        boolean blockedSouthEast = false;
+        boolean blockedNorthWest = false;
+        boolean blockedSouthWest = false;
 
         // Vérifie si position du pion n'est pas vide
         if (getPion(pionManouryIndex) == null) {
@@ -184,7 +188,22 @@ public class Damier {
                 continue;
             }
 
-            // Vérifie qu'un pion n'est pas à la position
+            // Vérification des diagonal
+            if (move.get(0) > 0) {
+                if (move.get(1) > 0 && blockedNorthEast) {
+                    continue;
+                } else if (blockedSouthEast) {
+                    continue;
+                }
+            } else {
+                if (move.get(1) > 0 && blockedNorthWest) {
+                    continue;
+                } else if (blockedSouthWest) {
+                    continue;
+                }
+            }
+
+            // Prise d'un Pion
             if (getPion(getManouryFrom2dPosition(x, y)) != null) {
                 int hopX = x + move.get(0);
                 int hopY = y + move.get(1);
@@ -198,19 +217,35 @@ public class Damier {
                 if (Objects.equals(pion.getCouleur(), getPion(getManouryFrom2dPosition(x, y)).getCouleur())) {
                     continue;
                 }
+                if (move.get(0) > 0) {
+                    if (move.get(1) > 0) {
+                        blockedNorthEast = true;
+                    } else {
+                        blockedSouthEast = true;
+                    }
+                } else {
+                    if (move.get(1) > 0) {
+                        blockedNorthWest = true;
+                    } else {
+                        blockedSouthWest = true;
+                    }
+                }
 
                 // Vérifie le prochain hop pour une prise possible
                 if (getPion(getManouryFrom2dPosition(hopX, hopY)) != null) {
                     continue;
                 }
 
-                // Change le validMove pour inclure le nect hop
+                // Change le validMove pour inclure le next hop
                 x += move.get(0);
                 y += move.get(1);
             }
 
             // Ajoute le validMove
             validMoves.add(List.of(x, y));
+            if (blockedNorthEast && blockedSouthEast && blockedNorthWest && blockedSouthWest) {
+                break;
+            }
         }
         return validMoves;
     }
