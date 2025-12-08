@@ -81,7 +81,6 @@ public class TestSingletonPartie {
             assertEquals(partie.getPion(i), partie.peekHistorique().getPion(i));
         }
         partie.undo();
-        partie.undo();
         for (int i = 1; i <= 50; i++) {
             assertEquals(partie.getPion(i), damier1.getPion(i));
         }

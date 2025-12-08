@@ -1,6 +1,7 @@
 package cstjean.mobile.dames;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Objects;
 
@@ -150,7 +151,17 @@ public class Partie {
      * Retourne à la dernière instance de l'historique.
      */
     protected void undo() {
-        this.damier = historique.undo();
+        Damier ancienDamier = historique.undo();
+        try {
+            this.damier = historique.peek();
+        } catch (EmptyStackException e) {
+            this.damier = ancienDamier;
+        }
+
+        prochainJoueur();
+        if (estTerminer) {
+            estTerminer = false;
+        }
     }
 
     /**

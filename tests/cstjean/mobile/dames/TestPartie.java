@@ -105,21 +105,22 @@ public class TestPartie {
      */
     @Test
     public void testHistorique() {
-        Partie partie = new Partie(new Damier());
-        partie.initialiser();
+        Damier damier1 = new Damier();
+        damier1.ajoutPion(28, new Dame(Pion.CouleurPion.Blanc));
+        damier1.ajoutPion(33, new Pion(Pion.CouleurPion.Noir));
+        Partie partie = new Partie(damier1);
         partie.save("32x32");
 
         for (int i = 1; i <= 50; i++) {
             assertEquals(partie.getPion(i), partie.peekHistorique().getPion(i));
         }
-        partie.prochainJoueur();
-        partie.deplacer(new int[]{3, 0}, new int[]{4, 1});
-        final Damier damier1 = partie.peekHistorique();
+        // Prise avec dame
+        assertEquals(new Pion(Pion.CouleurPion.Noir), partie.get2dArray()[6][5]);
+        partie.deplacer(new int[]{5, 4}, new int[]{7, 6});
         partie.save("32x32");
         for (int i = 1; i <= 50; i++) {
             assertEquals(partie.getPion(i), partie.peekHistorique().getPion(i));
         }
-        partie.undo();
         partie.undo();
         for (int i = 1; i <= 50; i++) {
             assertEquals(partie.getPion(i), damier1.getPion(i));
