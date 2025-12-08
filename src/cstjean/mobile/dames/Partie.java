@@ -244,7 +244,7 @@ public class Partie {
             logEntry.append("(");
         }
         logEntry.append(getManouryFrom2dPosition(pionPos[0], pionPos[1]));
-        if (pionNbAvantPrise != damier.getNombresPion()) {
+        if (pionNbAvantPrise != damier.getNombresPionParCouleur(couleurAdv)) {
             logEntry.append("x");
         } else {
             logEntry.append("-");
