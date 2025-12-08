@@ -138,9 +138,25 @@ public class Damier {
                 isValid = true;
                 int hx = targetPos[0] - pionPos[0];
                 int hy = targetPos[1] - pionPos[1];
-                if (Math.abs(hx) == 2 && Math.abs(hy) == 2) {
-                    int takenManoury = getManouryFrom2dPosition(pionPos[0] + hx / 2, pionPos[1] + hy / 2);
-                    ajoutPion(takenManoury, null);
+                if (Math.abs(hx) >= 2 && Math.abs(hy) >= 2) {
+                    // Fix need to find where the taken pion is in the diagonal
+                    int dx = Integer.signum(targetPos[0] - pionPos[0]);
+                    int dy = Integer.signum(targetPos[1] - pionPos[1]);
+
+                    int x = pionPos[0] + dx;
+                    int y = pionPos[1] + dy;
+                    while (x != targetPos[0] && y != targetPos[1]) {
+                        Pion mid = getPion(getManouryFrom2dPosition(x, y));
+
+                        if (mid != null && !mid.getCouleur().equals(getPion(pionManouryIndex).getCouleur())) {
+                            int takenManoury = getManouryFrom2dPosition(x, y);
+                            ajoutPion(takenManoury, null); // remove captured piece
+                            break;
+                        }
+
+                        x += dx;
+                        y += dy;
+                    }
                 }
 
                 ajoutPion(targetManouryIndex, getPion(pionManouryIndex));
@@ -155,10 +171,10 @@ public class Damier {
     }
 
     /**
-     * Donne un liste de tous les mouvement valid d'un pion.
+     * Donne une liste de tous les mouvements valid d'un pion.
      *
-     * @param pionPos La position du pion dont veut les déplacements vailde.
-     * @return Une liste avec les coordonnées des déplacement valide.
+     * @param pionPos La position du pion dont veut les déplacements valide.
+     * @return Une liste avec les coordonnées des déplacements valide.
      * @throws NoSuchElementException Quand aucun pion n'est trouvé sur la position donnée.
      */
     protected List<List<Integer>> getValidMoves(int[] pionPos) throws NoSuchElementException {
@@ -189,46 +205,49 @@ public class Damier {
             }
 
             // Vérification des diagonal
-            if (move.get(0) > 0) {
+            if (move.get(0) < 0) {
                 if (move.get(1) > 0 && blockedNorthEast) {
                     continue;
-                } else if (blockedSouthEast) {
+                } else if (move.get(1) < 0 && blockedNorthWest) {
                     continue;
                 }
             } else {
-                if (move.get(1) > 0 && blockedNorthWest) {
+                if (move.get(1) > 0 && blockedSouthEast) {
                     continue;
-                } else if (blockedSouthWest) {
+                } else if (move.get(1) < 0 && blockedSouthWest) {
                     continue;
                 }
             }
 
             // Prise d'un Pion
             if (getPion(getManouryFrom2dPosition(x, y)) != null) {
-                int hopX = x + move.get(0);
-                int hopY = y + move.get(1);
+                int dx = Integer.signum(move.get(0));
+                int dy = Integer.signum(move.get(1));
+                int hopX = x + dx;
+                int hopY = y + dy;
 
                 // Vérifie que l'index est pas out of bounds
                 if (hopX > 9 || hopX < 0 || hopY > 9 || hopY < 0) {
                     continue;
                 }
 
-                // Vérifie que le pion de ne prend pas un pion de la même couleur
-                if (Objects.equals(pion.getCouleur(), getPion(getManouryFrom2dPosition(x, y)).getCouleur())) {
-                    continue;
-                }
-                if (move.get(0) > 0) {
+                if (move.get(0) < 0) {
                     if (move.get(1) > 0) {
                         blockedNorthEast = true;
                     } else {
-                        blockedSouthEast = true;
+                        blockedNorthWest = true;
                     }
                 } else {
                     if (move.get(1) > 0) {
-                        blockedNorthWest = true;
+                        blockedSouthEast = true;
                     } else {
                         blockedSouthWest = true;
                     }
+                }
+
+                // Vérifie que le pion de ne prend pas un pion de la même couleur
+                if (Objects.equals(pion.getCouleur(), getPion(getManouryFrom2dPosition(x, y)).getCouleur())) {
+                    continue;
                 }
 
                 // Vérifie le prochain hop pour une prise possible
@@ -237,8 +256,8 @@ public class Damier {
                 }
 
                 // Change le validMove pour inclure le next hop
-                x += move.get(0);
-                y += move.get(1);
+                x += dx;
+                y += dy;
             }
 
             // Ajoute le validMove
