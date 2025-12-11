@@ -121,31 +121,31 @@ public class Damier {
      * @throws NoSuchElementException Quand aucun pion n'est trouvé sur la position donnée.
      * @throws IllegalArgumentException Quand le mouvement n'est pas valide.
      */
-    protected void deplacer(int[] pionPos, int[] targetPos) throws NoSuchElementException, IllegalArgumentException {
-        int pionManouryIndex = getManouryFrom2dPosition(pionPos[0], pionPos[1]);
-        int targetManouryIndex = getManouryFrom2dPosition(targetPos[0], targetPos[1]);
+    protected void deplacer(Position pionPos, Position targetPos) throws NoSuchElementException, IllegalArgumentException {
+        int pionManouryIndex = getManouryFrom2dPosition(pionPos.x(), pionPos.y());
+        int targetManouryIndex = getManouryFrom2dPosition(targetPos.x(), targetPos.y());
 
         // Vérifie si position du pion n'est pas vide
         if (getPion(pionManouryIndex) == null) {
-            throw new NoSuchElementException("Aucun pion trouver à [" + pionPos[0] +
-                    ", " + pionPos[1] + "] / Manoury: " + pionManouryIndex);
+            throw new NoSuchElementException("Aucun pion trouver à [" + pionPos.x() +
+                    ", " + pionPos.y() + "] / Manoury: " + pionManouryIndex);
         }
 
         boolean isValid = false;
         // Vérifie si la targetPos est un mouvement valide.
         for (List<Integer> validMove : getValidMoves(pionPos)) {
-            if (targetPos[0] == validMove.get(0) && targetPos[1] == validMove.get(1)) {
+            if (targetPos.x() == validMove.get(0) && targetPos.y() == validMove.get(1)) {
                 isValid = true;
-                int hx = targetPos[0] - pionPos[0];
-                int hy = targetPos[1] - pionPos[1];
+                int hx = targetPos.x() - pionPos.x();
+                int hy = targetPos.y() - pionPos.y();
                 if (Math.abs(hx) >= 2 && Math.abs(hy) >= 2) {
                     // Fix need to find where the taken pion is in the diagonal
-                    int dx = Integer.signum(targetPos[0] - pionPos[0]);
-                    int dy = Integer.signum(targetPos[1] - pionPos[1]);
+                    int dx = Integer.signum(targetPos.x() - pionPos.x());
+                    int dy = Integer.signum(targetPos.y() - pionPos.y());
 
-                    int x = pionPos[0] + dx;
-                    int y = pionPos[1] + dy;
-                    while (x != targetPos[0] && y != targetPos[1]) {
+                    int x = pionPos.x() + dx;
+                    int y = pionPos.y() + dy;
+                    while (x != targetPos.x() && y != targetPos.y()) {
                         Pion mid = getPion(getManouryFrom2dPosition(x, y));
 
                         if (mid != null && !mid.getCouleur().equals(getPion(pionManouryIndex).getCouleur())) {
@@ -166,7 +166,7 @@ public class Damier {
         }
 
         if (!isValid) {
-            throw new IllegalArgumentException("Movement Invalid [" + targetPos[0] + "," + targetPos[1] + "]");
+            throw new IllegalArgumentException("Movement Invalid [" + targetPos.x() + "," + targetPos.y() + "]");
         }
     }
 
@@ -177,9 +177,9 @@ public class Damier {
      * @return Une liste avec les coordonnées des déplacements valide.
      * @throws NoSuchElementException Quand aucun pion n'est trouvé sur la position donnée.
      */
-    protected List<List<Integer>> getValidMoves(int[] pionPos) throws NoSuchElementException {
+    protected List<List<Integer>> getValidMoves(Position pionPos) throws NoSuchElementException {
         List<List<Integer>> validMoves = new ArrayList<>();
-        int pionManouryIndex = getManouryFrom2dPosition(pionPos[0], pionPos[1]);
+        int pionManouryIndex = getManouryFrom2dPosition(pionPos.x(), pionPos.y());
         boolean blockedNorthEast = false;
         boolean blockedSouthEast = false;
         boolean blockedNorthWest = false;
@@ -187,17 +187,17 @@ public class Damier {
 
         // Vérifie si position du pion n'est pas vide
         if (getPion(pionManouryIndex) == null) {
-            throw new NoSuchElementException("Aucun pion trouver à [" + pionPos[0] +
-                    ", " + pionPos[1] + "] / Manoury: " + pionManouryIndex);
+            throw new NoSuchElementException("Aucun pion trouver à [" + pionPos.x() +
+                    ", " + pionPos.y() + "] / Manoury: " + pionManouryIndex);
         }
 
         Pion pion = getPion(pionManouryIndex);
 
-        List<List<Integer>> moves = pion.getPosition();
+        List<Position> moves = pion.getPosition();
 
-        for (List<Integer> move : moves) {
-            int x = move.get(0) + pionPos[0];
-            int y = move.get(1) + pionPos[1];
+        for (Position move : moves) {
+            int x = move.x() + pionPos.x();
+            int y = move.y() + pionPos.y();
 
             // Vérifie que l'index est pas out of bounds
             if (x > 9 || x < 0 || y > 9 || y < 0) {
@@ -205,24 +205,24 @@ public class Damier {
             }
 
             // Vérification des diagonal
-            if (move.get(0) < 0) {
-                if (move.get(1) > 0 && blockedNorthEast) {
+            if (move.x() < 0) {
+                if (move.y() > 0 && blockedNorthEast) {
                     continue;
-                } else if (move.get(1) < 0 && blockedNorthWest) {
+                } else if (move.y() < 0 && blockedNorthWest) {
                     continue;
                 }
             } else {
-                if (move.get(1) > 0 && blockedSouthEast) {
+                if (move.y() > 0 && blockedSouthEast) {
                     continue;
-                } else if (move.get(1) < 0 && blockedSouthWest) {
+                } else if (move.y() < 0 && blockedSouthWest) {
                     continue;
                 }
             }
 
             // Prise d'un Pion
             if (getPion(getManouryFrom2dPosition(x, y)) != null) {
-                int dx = Integer.signum(move.get(0));
-                int dy = Integer.signum(move.get(1));
+                int dx = Integer.signum(move.x());
+                int dy = Integer.signum(move.y());
                 int hopX = x + dx;
                 int hopY = y + dy;
 
@@ -231,14 +231,14 @@ public class Damier {
                     continue;
                 }
 
-                if (move.get(0) < 0) {
-                    if (move.get(1) > 0) {
+                if (move.x() < 0) {
+                    if (move.y() > 0) {
                         blockedNorthEast = true;
                     } else {
                         blockedNorthWest = true;
                     }
                 } else {
-                    if (move.get(1) > 0) {
+                    if (move.y() > 0) {
                         blockedSouthEast = true;
                     } else {
                         blockedSouthWest = true;

@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import java.io.PipedInputStream;
+
 /**
  * Class de test pour la class d'historique.
  */
@@ -28,7 +30,7 @@ public class TestHistorique {
         Damier damier2 = damier.instantiate();
         historique.save(damier2, "\n18-21");
         assertEquals(log.toString(), historique.getLog());
-        damier.deplacer(new int[]{6, 1}, new int[]{5, 0});
+        damier.deplacer(new Position(6, 1), new Position(5, 0));
         Damier damier3 = damier.instantiate();
         log.append("\n(18-22)");
         historique.save(damier3, "\n(18-22)");

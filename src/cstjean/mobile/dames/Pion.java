@@ -56,11 +56,11 @@ public class Pion {
      *
      * @return Une liste de position que le pion peut se déplacer.
      */
-    protected List<List<Integer>> getPosition() {
+    protected List<Position> getPosition() {
         if (couleur == CouleurPion.Blanc) {
-            return List.of(List.of(-1, 1), List.of(-1, -1));
+            return List.of(new Position(-1, 1), new Position(-1, -1));
         } else {
-            return List.of(List.of(1, 1), List.of(1, -1));
+            return List.of(new Position(1, 1), new Position(1, -1));
         }
     }
 

@@ -37,14 +37,14 @@ public class TestDame extends TestPion {
     }
 
     @Override
-    protected List<List<Integer>> getExpectedPositions(Pion pion) {
-        List<List<Integer>> moves = new ArrayList<>();
+    protected List<Position> getExpectedPositions(Pion pion) {
+        List<Position> moves = new ArrayList<>();
 
         for (int i = 1; i <= 10; i++) {
-            moves.add(List.of(i, i));
-            moves.add(List.of(i, -i));
-            moves.add(List.of(-i, i));
-            moves.add(List.of(-i, -i));
+            moves.add(new Position(i, i));
+            moves.add(new Position(i, -i));
+            moves.add(new Position(-i, i));
+            moves.add(new Position(-i, -i));
         }
 
         return moves;

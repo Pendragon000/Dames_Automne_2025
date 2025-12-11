@@ -74,7 +74,7 @@ public class TestSingletonPartie {
             assertEquals(partie.getPion(i), partie.peekHistorique().getPion(i));
         }
         partie.prochainJoueur();
-        partie.deplacer(new int[]{3, 0}, new int[]{4, 1});
+        partie.deplacer(new Position(3, 0), new Position(4, 1));
         final Damier damier1 = partie.peekHistorique();
         partie.save("32x32");
         for (int i = 1; i <= 50; i++) {
@@ -95,13 +95,13 @@ public class TestSingletonPartie {
         partie.initialiser();
 
         // Déplacement d'un pion blanc
-        partie.deplacer(new int[]{6, 1}, new int[]{5, 0});
+        partie.deplacer(new Position(6, 1), new Position(5, 0));
         assertNull(partie.get2dArray()[6][1]);
         Pion pionBlanc = new Pion(Pion.CouleurPion.Blanc);
         assertEquals(pionBlanc, partie.get2dArray()[5][0]);
 
         // Déplacement d'un pion noir
-        partie.deplacer(new int[]{3, 0}, new int[]{4, 1});
+        partie.deplacer(new Position(3, 0), new Position(4, 1));
         assertNull(partie.get2dArray()[3][0]);
         Pion pionNoir = new Pion(Pion.CouleurPion.Noir);
         assertEquals(pionNoir, partie.get2dArray()[4][1]);
@@ -113,12 +113,12 @@ public class TestSingletonPartie {
         partie.creerNewPartie(damier, List.of(new Joueur(Pion.CouleurPion.Blanc), new Joueur(Pion.CouleurPion.Noir)));
 
         // Déplacement d'une dame
-        partie.deplacer(new int[]{5, 4}, new int[]{6, 3});
+        partie.deplacer(new Position(5, 4), new Position(6, 3));
         assertNull(partie.get2dArray()[5][4]);
         Dame dame = new Dame(Pion.CouleurPion.Blanc);
         assertEquals(dame, partie.get2dArray()[6][3]);
         partie.prochainJoueur();
-        partie.deplacer(new int[]{6, 3}, new int[]{5, 4});
+        partie.deplacer(new Position(6, 3), new Position(5, 4));
         assertNull(partie.get2dArray()[6][3]);
         assertEquals(dame, partie.get2dArray()[5][4]);
     }
@@ -137,7 +137,7 @@ public class TestSingletonPartie {
 
         // Prise avec dame
         assertEquals(new Pion(Pion.CouleurPion.Noir), partie.get2dArray()[6][5]);
-        partie.deplacer(new int[]{5, 4}, new int[]{7, 6});
+        partie.deplacer(new Position(5, 4), new Position(7, 6));
         assertNull(partie.get2dArray()[5][4]);
         Dame dame = new Dame(Pion.CouleurPion.Blanc);
         assertNull(partie.get2dArray()[6][5]);
@@ -145,7 +145,7 @@ public class TestSingletonPartie {
         partie.prochainJoueur();
         damier1.ajoutPion(33, new Pion(Pion.CouleurPion.Noir));
         assertEquals(new Pion(Pion.CouleurPion.Noir), partie.get2dArray()[6][5]);
-        partie.deplacer(new int[]{7, 6}, new int[]{5, 4});
+        partie.deplacer(new Position(7, 6), new Position(5, 4));
         assertNull(partie.get2dArray()[7][6]);
         assertNull(partie.get2dArray()[6][5]);
         assertEquals(dame, partie.get2dArray()[5][4]);
@@ -167,12 +167,12 @@ public class TestSingletonPartie {
 
         // Promotion Pion blanc
         assertEquals(pionB, partie.get2dArray()[1][6]);
-        partie.deplacer(new int[]{1, 6}, new int[]{0, 7});
+        partie.deplacer(new Position(1, 6), new Position(0, 7));
         assertEquals(new Dame(Pion.CouleurPion.Blanc), partie.get2dArray()[0][7]);
 
         // Promotion Pion noir
         assertEquals(pionN, partie.get2dArray()[8][5]);
-        partie.deplacer(new int[]{8, 5}, new int[]{9, 6});
+        partie.deplacer(new Position(8, 5), new Position(9, 6));
         assertEquals(new Dame(Pion.CouleurPion.Noir), partie.get2dArray()[9][6]);
     }
 
@@ -193,6 +193,6 @@ public class TestSingletonPartie {
         SingletonPartie partie = SingletonPartie.getInstance();
         partie.creerNewPartie(damier, List.of(new Joueur(Pion.CouleurPion.Blanc), new Joueur(Pion.CouleurPion.Noir)));
         partie.initialiser();
-        assertEquals(damier.getValidMoves(new int[]{0, 1}), partie.getValidMoves(new int[]{0, 1}));
+        assertEquals(damier.getValidMoves(new Position(0, 1)), partie.getValidMoves(new Position(0, 1)));
     }
 }

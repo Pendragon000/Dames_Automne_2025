@@ -63,13 +63,13 @@ public class TestDamier {
         damier.initialiser();
 
         // Déplacement d'un pion noir
-        damier.deplacer(new int[]{3, 0}, new int[]{4, 1});
+        damier.deplacer(new Position(3, 0), new Position(4, 1));
         assertNull(damier.get2dArray()[3][0]);
         Pion pionNoir = new Pion(Pion.CouleurPion.Noir);
         assertEquals(pionNoir, damier.get2dArray()[4][1]);
 
         // Déplacement d'un pion blanc
-        damier.deplacer(new int[]{6, 1}, new int[]{5, 0});
+        damier.deplacer(new Position(6, 1), new Position(5, 0));
         assertNull(damier.get2dArray()[6][1]);
         Pion pionBlanc = new Pion(Pion.CouleurPion.Blanc);
         assertEquals(pionBlanc, damier.get2dArray()[5][0]);
@@ -79,20 +79,20 @@ public class TestDamier {
         damier.ajoutPion(28, new Dame(Pion.CouleurPion.Blanc));
 
         // Déplacement d'une dame
-        damier.deplacer(new int[]{5, 4}, new int[]{6, 3});
+        damier.deplacer(new Position(5, 4), new Position(6, 3));
         assertNull(damier.get2dArray()[5][4]);
         Dame dame = new Dame(Pion.CouleurPion.Blanc);
         assertEquals(dame, damier.get2dArray()[6][3]);
 
-        damier.deplacer(new int[]{6, 3}, new int[]{5, 4});
+        damier.deplacer(new Position(6, 3), new Position(5, 4));
         assertNull(damier.get2dArray()[6][3]);
         assertEquals(dame, damier.get2dArray()[5][4]);
 
-        damier.deplacer(new int[]{5, 4}, new int[]{9, 8});
+        damier.deplacer(new Position(5, 4), new Position(9, 8));
         assertNull(damier.get2dArray()[5][4]);
         assertEquals(dame, damier.get2dArray()[9][8]);
 
-        damier.deplacer(new int[]{9, 8}, new int[]{1, 0});
+        damier.deplacer(new Position(9, 8), new Position(1, 0));
         assertNull(damier.get2dArray()[9][8]);
         assertEquals(dame, damier.get2dArray()[1][0]);
     }
@@ -108,7 +108,7 @@ public class TestDamier {
 
         // Prise avec dame
         assertEquals(new Pion(Pion.CouleurPion.Noir), damier.get2dArray()[6][5]);
-        damier.deplacer(new int[]{5, 4}, new int[]{7, 6});
+        damier.deplacer(new Position(5, 4), new Position(7, 6));
         assertNull(damier.get2dArray()[5][4]);
         Dame dame = new Dame(Pion.CouleurPion.Blanc);
         assertNull(damier.get2dArray()[6][5]);
@@ -116,7 +116,7 @@ public class TestDamier {
 
         damier.ajoutPion(33, new Pion(Pion.CouleurPion.Noir));
         assertEquals(new Pion(Pion.CouleurPion.Noir), damier.get2dArray()[6][5]);
-        damier.deplacer(new int[]{7, 6}, new int[]{5, 4});
+        damier.deplacer(new Position(7, 6), new Position(5, 4));
         assertNull(damier.get2dArray()[7][6]);
         assertNull(damier.get2dArray()[6][5]);
         assertEquals(dame, damier.get2dArray()[5][4]);
@@ -202,7 +202,7 @@ public class TestDamier {
     @Test(expected = NoSuchElementException.class)
     public void testGetValidMovesPionNull() {
         Damier damier = new Damier();
-        damier.getValidMoves(new int[]{5, 4});
+        damier.getValidMoves(new Position(5, 4));
     }
 
     /**
@@ -212,7 +212,7 @@ public class TestDamier {
     @Test(expected = NoSuchElementException.class)
     public void testDeplacerPionNull() {
         Damier damier = new Damier();
-        damier.deplacer(new int[]{5, 4}, new int[]{5, 4});
+        damier.deplacer(new Position(5, 4), new Position(5, 4));
     }
 
     /**
@@ -223,7 +223,7 @@ public class TestDamier {
     public void testDeplacerMouvementInvalide() {
         Damier damier = new Damier();
         damier.ajoutPion(damier.getManouryFrom2dPosition(5, 4), new Pion());
-        damier.deplacer(new int[]{5, 4}, new int[]{5, 4});
+        damier.deplacer(new Position(5, 4), new Position(5, 4));
     }
 
     /**
@@ -244,6 +244,20 @@ public class TestDamier {
         damier.ajoutPion(33, new Pion(Pion.CouleurPion.Noir));
         List<List<Integer>> expectedMouvementValide = List.of(List.of(7, 6), List.of(7, 2),
                 List.of(3, 6), List.of(3, 2));
-        assertEquals(expectedMouvementValide, damier.getValidMoves(new int[]{5, 4}));
+        assertEquals(expectedMouvementValide, damier.getValidMoves(new Position(5, 4)));
+    }
+
+    @Test
+    public void testDeplacementHopDiagonal() {
+        Damier damier = new Damier();
+
+        // 5,4
+        damier.ajoutPion(28, new Pion(Pion.CouleurPion.Blanc));
+        // 4,5
+        damier.ajoutPion(23, new Pion(Pion.CouleurPion.Noir));
+
+        List<List<Integer>> expectedMouvementValide = List.of(List.of(3, 6), List.of(4, 3));
+
+        assertEquals(expectedMouvementValide, damier.getValidMoves(new Position(5, 4)));
     }
 }

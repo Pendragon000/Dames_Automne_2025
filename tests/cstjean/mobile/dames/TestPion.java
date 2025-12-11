@@ -107,11 +107,11 @@ public class TestPion {
      * @param pion Le pion dont on veut la liste de position.
      * @return La liste de position possible pour le pion.
      */
-    protected List<List<Integer>> getExpectedPositions(Pion pion) {
+    protected List<Position> getExpectedPositions(Pion pion) {
         if (pion.getCouleur().equals("blanc")) {
-            return List.of(List.of(-1, 1), List.of(-1, -1));
+            return List.of(new Position(-1, 1), new Position(-1, -1));
         } else {
-            return List.of(List.of(1, 1), List.of(1, -1));
+            return List.of(new Position(1, 1), new Position(1, -1));
         }
     }
 }

@@ -222,7 +222,7 @@ public class Partie {
      * @throws IllegalStateException Erreur lors du déplacement undo le mouvement retourne à l'état du damier avant.
      * @throws IllegalArgumentException Le pion choisi n'est pas le pion du joueur courant.
      */
-    protected void deplacer(int[] pionPos, int[] targetPos) throws IllegalArgumentException, IllegalStateException {
+    protected void deplacer(Position pionPos, Position targetPos) throws IllegalArgumentException, IllegalStateException {
 
         // Vérifie que la partie n'est pas terminée.
         if (estTerminer) {
@@ -230,8 +230,8 @@ public class Partie {
         }
 
         // Vérifie que le pion est de bonne couleur
-        if (get2dArray()[pionPos[0]][pionPos[1]] != null) {
-            if (!get2dArray()[pionPos[0]][pionPos[1]].getCouleur().equals(getJoueurCourant().getCouleur())) {
+        if (get2dArray()[pionPos.x()][pionPos.y()] != null) {
+            if (!get2dArray()[pionPos.x()][pionPos.y()].getCouleur().equals(getJoueurCourant().getCouleur())) {
                 throw new IllegalArgumentException("Le pion choisie n'est pas de la bonne couleur (Attendue: " +
                         getJoueurCourant().getCouleur() + ")");
             }
@@ -254,13 +254,13 @@ public class Partie {
         if (Objects.equals(getJoueurCourant().getCouleur(), Pion.CouleurPion.Blanc.toString())) {
             logEntry.append("(");
         }
-        logEntry.append(getManouryFrom2dPosition(pionPos[0], pionPos[1]));
+        logEntry.append(getManouryFrom2dPosition(pionPos.x(), pionPos.y()));
         if (pionNbAvantPrise != damier.getNombresPionParCouleur(couleurAdv)) {
             logEntry.append("x");
         } else {
             logEntry.append("-");
         }
-        logEntry.append(getManouryFrom2dPosition(targetPos[0], targetPos[1]));
+        logEntry.append(getManouryFrom2dPosition(targetPos.x(), targetPos.y()));
         if (Objects.equals(getJoueurCourant().getCouleur(), Pion.CouleurPion.Blanc.toString())) {
             logEntry.append(")");
         }
@@ -286,7 +286,7 @@ public class Partie {
                 boolean tileIsWhite = (i + j) % 2 == 0;
                 if (!tileIsWhite && board[i][j] != null) {
                     if (Objects.equals(board[i][j].getCouleur(), couleurAdv.toString())) {
-                        if (!getValidMoves(new int[]{i, j}).isEmpty()) {
+                        if (!getValidMoves(new Position(i, j)).isEmpty()) {
                             advPeutJouer = true;
                             break;
                         }
@@ -327,7 +327,7 @@ public class Partie {
      * @param pionPos La position du pion dont on veut les déplacements valides.
      * @return Une liste de position dont le pion peut se déplacer à
      */
-    protected List<List<Integer>> getValidMoves(int[] pionPos) {
+    protected List<List<Integer>> getValidMoves(Position pionPos) {
         return damier.getValidMoves(pionPos);
     }
 

@@ -34,14 +34,14 @@ public class Dame extends Pion {
     }
 
     @Override
-    protected List<List<Integer>> getPosition() {
-        List<List<Integer>> moves = new ArrayList<>();
+    protected List<Position> getPosition() {
+        List<Position> moves = new ArrayList<>();
 
         for (int i = 1; i <= 10; i++) {
-            moves.add(List.of(i, i));
-            moves.add(List.of(i, -i));
-            moves.add(List.of(-i, i));
-            moves.add(List.of(-i, -i));
+            moves.add(new Position(i, i));
+            moves.add(new Position(i, -i));
+            moves.add(new Position(-i, i));
+            moves.add(new Position(-i, -i));
         }
 
         return moves;

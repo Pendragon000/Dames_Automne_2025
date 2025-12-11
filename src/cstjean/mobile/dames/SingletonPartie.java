@@ -160,7 +160,7 @@ public class SingletonPartie {
      * @throws IllegalStateException Erreur lors du déplacement undo le mouvement retourne à l'état du damier avant.
      * @throws IllegalArgumentException Le pion choisi n'est pas le pion du joueur courant.
      */
-    public void deplacer(int[] pionPos, int[] targetPos) throws IllegalArgumentException, IllegalStateException {
+    public void deplacer(Position pionPos, Position targetPos) throws IllegalArgumentException, IllegalStateException {
         partie.deplacer(pionPos, targetPos);
     }
 
@@ -170,7 +170,7 @@ public class SingletonPartie {
      * @param pionPos La position du pion dont on veut les déplacements valides.
      * @return Une liste de position dont le pion peut se déplacer à
      */
-    public List<List<Integer>> getValidMoves(int[] pionPos) {
+    public List<List<Integer>> getValidMoves(Position pionPos) {
         return partie.getValidMoves(pionPos);
     }
 
