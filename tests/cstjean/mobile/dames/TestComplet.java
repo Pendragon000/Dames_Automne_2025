@@ -20,7 +20,8 @@ import org.junit.runners.Suite;
     TestJoueur.class,
     TestRepresentationDamier.class,
     TestHistorique.class,
-    TestSingletonPartie.class
+    TestSingletonPartie.class,
+    TestValidMoves.class
 })
 public class TestComplet {
 
